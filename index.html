@@ -5,7 +5,476 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ritesh Raj Nepal | VS Code Portfolio</title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Fira Code Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+
+        /* VS Code Dark+ Theme Color Palette */
+        :root {
+            --font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+            --bg-color: #1e1e1e;
+            --sidebar-bg: #252526;
+            --activity-bar-bg: #333333;
+            --title-bar-bg: #323233;
+            --status-bar-bg: #007acc;
+            --tab-active-bg: #1e1e1e;
+            --tab-inactive-bg: #2d2d2d;
+            --explorer-header-bg: #1e1e1e;
+            --list-hover-bg: #2a2d2e;
+            --list-active-bg: #094771;
+            --border-color: #3c3c3c;
+            
+            /* Syntax Highlighting & Text Colors */
+            --text-color: #d4d4d4;
+            --text-color-light: #cccccc;
+            --icon-color-inactive: #858585;
+            --icon-color-active: #ffffff;
+            --comment-green: #6a9955;
+            --tag-gray: #808080;
+            --tag-name-blue: #569cd6;
+            --attr-name-lightblue: #9cdcfe;
+            --attr-value-orange: #ce9178;
+            --keyword-purple: #c586c0;
+            --function-yellow: #dcdcaa;
+            --property-blue: #9cdcfe;
+            --string-orange: #ce9178;
+            --number-lightgreen: #b5cea8;
+            --json-key-blue: #9cdcfe;
+            --md-heading-yellow: #dcdcaa;
+            --md-link-blue: #569cd6;
+
+            /* Terminal Colors */
+            --terminal-bg: #181818;
+            --terminal-header-bg: #252526;
+            --terminal-prompt-green: #4af626;
+        }
+
+        /* Base Body Styles */
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            height: 100vh;
+            overflow: hidden; /* This is typically for VS Code-like full screen apps */
+        }
+
+        /* Optional: To prevent scrolling on body when menu is active */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* --- VS Code Container Layout --- */
+        .vscode-container {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 30px); /* Adjust height for title bar */
+        }
+
+        .vscode-container.sidebar-hidden .sidebar {
+            width: 0;
+            overflow: hidden;
+            border-right: none;
+        }
+
+        .vscode-container.sidebar-hidden .main-content {
+            margin-left: 0;
+            width: 100%; /* Ensure it takes full width when sidebar is hidden */
+        }
+
+        /* --- Title Bar --- */
+        .title-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--title-bar-bg);
+            padding: 0 10px;
+            height: 30px;
+            color: var(--text-color-light);
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .title-bar-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+        }
+        .title-bar-path {
+            flex-grow: 1;
+            text-align: center;
+            color: var(--text-color-light);
+            opacity: 0.8;
+            font-size: 13px;
+        }
+
+        /* --- Top Menu Dropdowns (File, Edit, etc.) --- */
+        .menu-dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-item {
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 8px;
+            cursor: pointer;
+            user-select: none;
+            /* Added to align with existing menu-item styling */
+            color: var(--text-color-light); /* Ensure text color is from palette */
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--sidebar-bg); /* Use sidebar background for dropdowns */
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+            z-index: 10;
+            border: 1px solid var(--border-color);
+            padding: 5px 0;
+            left: 0;
+            top: 100%;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .dropdown-item {
+            color: var(--text-color);
+            padding: 6px 15px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--list-hover-bg);
+        }
+
+        .dropdown-item.separator {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 5px 0;
+            padding: 0;
+        }
+
+        .menu-dropdown-container:hover .dropdown-content {
+            display: block;
+        }
+
+        /* --- Activity Bar (Left Side - Top & Bottom) --- */
+        .activity-bar {
+            background-color: var(--activity-bar-bg);
+            width: 50px;
+            height: 100%; /* Changed from 100vh for nested flex context */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-right: 1px solid #1a1a1a;
+            flex-shrink: 0;
+            justify-content: space-between; /* Pushes top and bottom sections apart */
+        }
+
+        .activity-bar-top, .activity-bar-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 23px;
+        }
+
+        .activity-bar a {
+            text-decoration: none;
+        }
+
+        .activity-bar .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            fill: var(--icon-color-inactive);
+            transition: fill 0.2s ease;
+        }
+
+        .activity-bar .icon:hover,
+        .activity-bar a:hover .icon {
+            fill: var(--icon-color-active);
+        }
+
+        .activity-bar .icon.active {
+            fill: var(--icon-color-active);
+        }
+
+        /* Styling for buttons that contain icons (like the settings gear) */
+        .activity-bar .icon-button {
+            background: none;
+            border: none;
+            padding: 0; /* Remove default button padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px; /* Match icon size */
+            height: 24px; /* Match icon size */
+            cursor: pointer;
+        }
+
+        /* --- Sidebar (Left Panel) --- */
+        .sidebar {
+            width: 240px;
+            background-color: var(--sidebar-bg);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            border-right: 1px solid var(--border-color); /* Added border for definition */
+        }
+        .sidebar-header {
+            padding: 10px 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            color: var(--text-color-light); /* Ensure header text color */
+        }
+        .file-explorer { list-style: none; padding: 0; margin: 0; }
+        .file-explorer-item { padding: 6px 20px; cursor: pointer; display: flex; align-items: center; font-size: 14px; }
+        .file-explorer-item:hover { background-color: var(--list-hover-bg); }
+        .file-explorer-item.active-in-sidebar { background-color: var(--list-active-bg); }
+        .file-icon { width: 18px; height: 18px; margin-right: 8px; }
+
+
+        /* --- Main Content Area (Editor, Terminal) --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: var(--bg-color);
+        }
+        .editor-tabs { display: flex; background-color: var(--activity-bar-bg); flex-shrink: 0; }
+        .tab { 
+            padding: 8px 15px; 
+            background-color: var(--tab-inactive-bg); 
+            border-right: 1px solid var(--activity-bar-bg); 
+            cursor: pointer; 
+            font-size: 14px; 
+            display: flex; 
+            align-items: center; 
+            color: #9e9e9e; 
+        }
+        .tab.active { background-color: var(--tab-active-bg); color: white; }
+        .tab .close-icon {
+            font-family: sans-serif;
+            margin-left: 12px;
+            padding: 2px 4px;
+            font-size: 14px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+        .tab .close-icon:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        .editor { flex-grow: 1; padding: 10px 20px; overflow-y: auto; font-size: 15px; line-height: 1.7; position: relative; }
+        .editor-pane { display: none; }
+        .editor-pane.active { display: block; }
+        .welcome-pane { text-align: center; padding-top: 50px; color: var(--text-color-light); opacity: 0.8; }
+
+        pre, code { font-family: var(--font-family); white-space: pre-wrap; }
+        .code-comment { color: var(--comment-green); font-style: italic; }
+        .code-tag-bracket { color: var(--tag-gray); }
+        .code-tag-name { color: var(--tag-name-blue); }
+        .code-attr-name { color: var(--attr-name-lightblue); }
+        .code-attr-value { color: var(--attr-value-orange); }
+        .code-text { color: var(--text-color); }
+        .code-keyword { color: var(--keyword-purple); }
+        .code-function { color: var(--function-yellow); }
+        .code-variable { color: var(--property-blue); }
+        .code-string { color: var(--string-orange); }
+        .code-number { color: var(--number-lightgreen); }
+        .code-json-key { color: var(--json-key-blue); }
+        .code-md-heading { color: var(--md-heading-yellow); }
+        .code-md-link { color: var(--md-link-blue); }
+        a.code-link { color: var(--attr-value-orange); text-decoration: none; }
+        a.code-link:hover { text-decoration: underline; }
+
+        /* --- Terminal --- */
+        .terminal {
+            background-color: var(--terminal-bg);
+            flex-shrink: 0;
+            height: 25%;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        .terminal-header {
+            background-color: var(--terminal-header-bg);
+            padding: 5px 15px;
+            font-size: 13px;
+        }
+        .terminal-body {
+            padding: 10px 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            font-size: 14px;
+        }
+        .terminal-line {
+            line-height: 1.6;
+        }
+        .terminal-prompt {
+            color: var(--terminal-prompt-green);
+            margin-right: 8px;
+        }
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+        }
+        .terminal-input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 14px;
+            outline: none;
+        }
+        .terminal-input:focus {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { box-shadow: none; }
+            50% { box-shadow: inset 1px 0 var(--text-color); }
+        }
+
+        /* --- Status Bar --- */
+        .status-bar { background-color: var(--status-bar-bg); color: white; padding: 4px 15px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+        .status-bar-left, .status-bar-right { display: flex; align-items: center; gap: 15px; }
+
+        /* --- Settings Menu Styling (Integrated with your VS Code palette) --- */
+
+        .settings-menu-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: 2000; /* Higher than other content */
+            justify-content: center; /* Center the menu content */
+            align-items: center;
+            /* Fade in effect */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .settings-menu-overlay.active {
+            display: flex; /* Show when active */
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .settings-menu-content {
+            background-color: var(--sidebar-bg); /* Use sidebar background for menu */
+            color: var(--text-color); /* General text color */
+            border-radius: 5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            width: 250px; /* Adjusted width to match the image better */
+            max-width: 90%;
+            padding: 5px 0; /* Padding top/bottom, no side padding for list items to go full width */
+            position: absolute;
+            /* Positioning to mimic VS Code context menu from bottom-left activity bar icon */
+            bottom: 50px; /* Place it above the activity bar itself (50px height) */
+            left: 40px; /* Align with the activity bar's width + some padding */
+            transform-origin: bottom left; /* For pop-up animation */
+            transform: scale(0.95); /* Initial scale for pop-in effect */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            font-family: var(--font-family); /* Apply Fira Code font */
+        }
+
+        .settings-menu-overlay.active .settings-menu-content {
+            transform: scale(1); /* Scale to normal when active */
+        }
+
+        .settings-header {
+            display: none; /* Removed as per the image, which doesn't have a header for this menu */
+            /* If you still want a header, uncomment and style appropriately */
+            /*
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 5px;
+            */
+        }
+
+        .settings-header h2 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+
+        .close-btn {
+            display: none; /* No close button needed for this type of context menu */
+        }
+
+        .settings-menu-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .settings-menu-content li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-menu-content .menu-item {
+            display: block; /* Make the whole area clickable */
+            padding: 6px 15px; /* Adjust padding for menu items */
+            color: var(--text-color); /* Use general text color */
+            text-decoration: none;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.2s ease;
+            font-size: 13px; /* Match VS Code menu font size */
+        }
+
+        .settings-menu-content .menu-item:hover {
+            background-color: var(--list-hover-bg); /* Use list hover background */
+        }
+
+        .settings-menu-content .shortcut {
+            font-size: 0.8em;
+            color: var(--icon-color-inactive); /* Use a muted color for shortcuts */
+            padding-right: 15px;
+        }
+
+        .settings-menu-content .separator {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 5px 0; /* Adjust margin for separator */
+        }
+
+        .settings-menu-content .has-submenu {
+            position: relative;
+        }
+
+        .settings-menu-content .submenu-arrow {
+            position: absolute;
+            right: 15px;
+            color: var(--icon-color-inactive); /* Muted color for arrow */
+            pointer-events: none;
+        }
+        #settings-toggle{
+            margin-top: 24vw;
+        }
+    </style>
 </head>
 <body>
     <div class="title-bar">
@@ -281,6 +750,236 @@ every project I undertake.
         </div>
     </div>
    
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- DOM Elements ---
+            const fileExplorerItems = document.querySelectorAll('.file-explorer-item');
+            const editorTabsContainer = document.getElementById('editor-tabs');
+            const editorPanes = document.querySelectorAll('.editor-pane');
+            const titleBarPath = document.getElementById('title-bar-path');
+            const terminalBody = document.getElementById('terminal-body');
+            const terminalInput = document.getElementById('terminal-input');
+
+            // New: Get the file icon and the main container
+            const fileActivityIcon = document.querySelector('.activity-bar-top .icon.active');
+            const vscodeContainer = document.querySelector('.vscode-container');
+
+            // --- State ---
+            let openFiles = new Set();
+            let activeFile = 'welcome';
+            let isSidebarVisible = true; // New state variable for sidebar visibility
+
+            // --- File Metadata ---
+            const fileMetadata = {
+                profile: { icon: 'https://img.icons8.com/color/48/html-5--v1.png', ext: 'html' },
+                about: { icon: 'https://img.icons8.com/office/48/markdown.png', ext: 'md' },
+                skills: { icon: 'https://img.icons8.com/color/48/css3.png', ext: 'css' },
+                projects: { icon: 'https://img.icons8.com/color/48/json.png', ext: 'json' },
+                experience: { icon: 'https://img.icons8.com/color/48/javascript--v1.png', ext: 'js' },
+                achievements: { icon: 'https://img.icons8.com/color/48/python--v1.png', ext: 'py' },
+                contact: { icon: 'https://img.icons8.com/fluency/48/contact-card.png', ext: 'js' }
+            };
+
+            // --- Functions ---
+            function setActive(fileId) {
+                activeFile = fileId;
+
+                // Update tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                const activeTab = document.querySelector(`.tab[data-file="${fileId}"]`);
+                if (activeTab) activeTab.classList.add('active');
+
+                // Update sidebar
+                fileExplorerItems.forEach(i => i.classList.remove('active-in-sidebar'));
+                const activeExplorerItem = document.querySelector(`.file-explorer-item[data-file="${fileId}"]`);
+                if (activeExplorerItem) activeExplorerItem.classList.add('active-in-sidebar');
+
+                // Update panes
+                editorPanes.forEach(p => p.classList.remove('active'));
+                document.getElementById(`${fileId}-pane`).classList.add('active');
+
+                // Update title bar
+                if (fileId !== 'welcome') {
+                    const meta = fileMetadata[fileId];
+                    titleBarPath.textContent = `Ritesh/${fileId}.${meta.ext} - VS Code Portfolio`;
+                } else {
+                    titleBarPath.textContent = `[Ritesh Raj Nepal - VS Code Portfolio]`;
+                }
+            }
+
+            function openFile(fileId) {
+                if (!openFiles.has(fileId)) {
+                    openFiles.add(fileId);
+                    createTab(fileId);
+                }
+                setActive(fileId);
+            }
+
+            function closeFile(fileId, event) {
+                event.stopPropagation();
+
+                openFiles.delete(fileId);
+                document.querySelector(`.tab[data-file="${fileId}"]`).remove();
+
+                if (activeFile === fileId) {
+                    const remainingFiles = Array.from(openFiles);
+                    if (remainingFiles.length > 0) {
+                        setActive(remainingFiles[remainingFiles.length - 1]);
+                    } else {
+                        setActive('welcome');
+                    }
+                }
+            }
+
+            function createTab(fileId) {
+                const meta = fileMetadata[fileId];
+                const tab = document.createElement('div');
+                tab.className = 'tab';
+                tab.dataset.file = fileId;
+                tab.innerHTML = `
+                    <img src="${meta.icon}" class="file-icon" alt="${fileId} icon">
+                    <span>${fileId}.${meta.ext}</span>
+                    <span class="close-icon" data-file="${fileId}">&times;</span>
+                `;
+
+                tab.addEventListener('click', () => setActive(fileId));
+                tab.querySelector('.close-icon').addEventListener('click', (e) => closeFile(fileId, e));
+
+                editorTabsContainer.appendChild(tab);
+            }
+
+            // New: Function to toggle sidebar visibility
+            function toggleSidebar() {
+                isSidebarVisible = !isSidebarVisible;
+                if (isSidebarVisible) {
+                    vscodeContainer.classList.remove('sidebar-hidden');
+                    fileActivityIcon.classList.add('active'); // Set file icon as active
+                } else {
+                    vscodeContainer.classList.add('sidebar-hidden');
+                    fileActivityIcon.classList.remove('active'); // Deactivate file icon
+                }
+            }
+
+            // --- Terminal Logic ---
+            function processTerminalCommand(command) {
+                const commandOutput = document.createElement('div');
+                commandOutput.className = 'terminal-line';
+                let response = '';
+
+                switch (command.toLowerCase()) {
+                    case 'help':
+                        response = `Available commands: 'whoami', 'skills', 'projects', 'contact', 'date', 'sudo', 'clear'`;
+                        break;
+                    case 'whoami':
+                        response = `You're checking out the portfolio of Ritesh Raj Nepal, a Full-Stack Developer and avid Chess player from Biratnagar, Nepal.`;
+                        break;
+                    case 'date':
+                        response = `Today is ${new Date().toLocaleDateString('en-NP', { year: 'numeric', month: 'long', day: 'numeric' })}. A great day to hire a developer!`;
+                        break;
+                    case 'sudo':
+                        response = `<span style="color: red;">ERROR:</span> User is not in the sudoers file. This incident will be reported.`;
+                        break;
+                    case 'skills':
+                    case 'projects':
+                    case 'contact':
+                        response = `Pro-tip: For a better view, just click on the '${command}.js' file in the sidebar!`;
+                        openFile(command);
+                        break;
+                    case 'clear':
+                        terminalBody.innerHTML = `
+                            <div class="terminal-line"><span class="code-text">Terminal cleared.</span></div>
+                            <div class="terminal-input-line">
+                                <span class="terminal-prompt">user@portfolio:~$</span>
+                                <input type="text" class="terminal-input" id="terminal-input" autofocus />
+                            </div>`;
+                        // Re-assign the input element after clearing
+                        document.getElementById('terminal-input').addEventListener('keydown', handleTerminalInput);
+                        return;
+                    default:
+                        response = `<span style="color: orange;">COMMAND NOT FOUND:</span> ${command}. Try 'help'.`;
+                        break;
+                }
+                commandOutput.innerHTML = response;
+                terminalBody.insertBefore(commandOutput, terminalBody.lastElementChild);
+            }
+
+            function handleTerminalInput(e) {
+                if (e.key === 'Enter') {
+                    const command = e.target.value.trim();
+                    if (command) {
+                        const enteredLine = document.createElement('div');
+                        enteredLine.className = 'terminal-line';
+                        enteredLine.innerHTML = `<span class="terminal-prompt">user@portfolio:~$</span>${command}`;
+                        terminalBody.insertBefore(enteredLine, terminalBody.lastElementChild);
+
+                        processTerminalCommand(command);
+                        e.target.value = '';
+                    }
+                    // Scroll to bottom
+                    terminalBody.scrollTop = terminalBody.scrollHeight;
+                }
+            }
+
+            // --- Initial Setup ---
+            fileExplorerItems.forEach(item => {
+                item.addEventListener('click', () => openFile(item.dataset.file));
+            });
+
+            terminalInput.addEventListener('keydown', handleTerminalInput);
+
+            // New: Add event listener to the file activity bar icon
+            fileActivityIcon.addEventListener('click', toggleSidebar);
+
+            // Set initial state
+            setActive('welcome');
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const settingsToggleBtn = document.getElementById('settings-toggle');
+            const settingsMenu = document.getElementById('settings-menu');
+            const closeSettingsBtn = document.getElementById('close-settings');
+            const body = document.body;
+
+            // Function to open the settings menu
+            function openSettingsMenu() {
+                settingsMenu.classList.add('active');
+                // Optional: Add a class to body to prevent scrolling if the menu is full screen
+                body.classList.add('no-scroll'); 
+            }
+
+            // Function to close the settings menu
+            function closeSettingsMenu() {
+                settingsMenu.classList.remove('active');
+                body.classList.remove('no-scroll');
+            }
+
+            // Toggle settings menu on button click
+            settingsToggleBtn.addEventListener('click', () => {
+                if (settingsMenu.classList.contains('active')) {
+                    closeSettingsMenu();
+                } else {
+                    openSettingsMenu();
+                }
+            });
+
+            // Close settings menu when the close button is clicked
+            closeSettingsBtn.addEventListener('click', closeSettingsMenu);
+
+            // Close settings menu when clicking outside the menu content
+            settingsMenu.addEventListener('click', (event) => {
+                if (event.target === settingsMenu) { // Only if clicked directly on the overlay, not content
+                    closeSettingsMenu();
+                }
+            });
+
+            // Close settings menu when Escape key is pressed
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && settingsMenu.classList.contains('active')) {
+                    closeSettingsMenu();
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>

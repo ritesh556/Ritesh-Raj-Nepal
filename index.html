@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ritesh Raj Nepal | VS Code Portfolio</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="title-bar">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" alt="VS Code Logo" class="title-bar-logo">
+        
+        <div class="menu-dropdown-container">
+            <span class="menu-item">File</span>
+            <div class="dropdown-content">
+                <div class="dropdown-item">New File</div>
+                <div class="dropdown-item">New Window</div>
+                <div class="dropdown-item separator"></div>
+                <div class="dropdown-item">Open Folder...</div>
+                <div class="dropdown-item">Open Workspace from File...</div>
+                <div class="dropdown-item separator"></div>
+                <div class="dropdown-item">Save</div>
+                <div class="dropdown-item">Save As...</div>
+                <div class="dropdown-item">Save All</div>
+            </div>
+        </div>
+
+        <div class="menu-dropdown-container">
+            <span class="menu-item">Edit</span>
+            <div class="dropdown-content">
+                <div class="dropdown-item">Undo</div>
+                <div class="dropdown-item">Redo</div>
+                <div class="dropdown-item separator"></div>
+                <div class="dropdown-item">Cut</div>
+                <div class="dropdown-item">Copy</div>
+                <div class="dropdown-item">Paste</div>
+            </div>
+        </div>
+
+        <div class="menu-dropdown-container">
+            <span class="menu-item">Selection</span>
+            <div class="dropdown-content">
+                <div class="dropdown-item">Select All</div>
+                <div class="dropdown-item">Expand Selection</div>
+                <div class="dropdown-item">Shrink Selection</div>
+            </div>
+        </div>
+
+        <div class="menu-dropdown-container">
+            <span class="menu-item">View</span>
+            <div class="dropdown-content">
+                <div class="dropdown-item">Command Palette...</div>
+                <div class="dropdown-item">Open View...</div>
+                <div class="dropdown-item separator"></div>
+                <div class="dropdown-item">Appearance</div>
+                <div class="dropdown-item">Editor Layout</div>
+                <div class="dropdown-item separator"></div>
+                <div class="dropdown-item">Explorer</div>
+                <div class="dropdown-item">Search</div>
+                <div class="dropdown-item">Source Control</div>
+                <div class="dropdown-item">Run and Debug</div>
+                <div class="dropdown-item">Extensions</div>
+            </div>
+        </div>
+
+        <div class="menu-dropdown-container">
+            <span class="menu-item">Go</span>
+            <div class="dropdown-content">
+                <div class="dropdown-item">Go to File...</div>
+                <div class="dropdown-item">Go to Symbol in Workspace...</div>
+                <div class="dropdown-item separator"></div>
+                <div class="dropdown-item">Go to Definition</div>
+                <div class="dropdown-item">Go to Declaration</div>
+            </div>
+        </div>
+
+        <span class="title-bar-path" id="title-bar-path">[Ritesh Raj Nepal - VS Code Portfolio]</span>
+    </div>
+
+    <div class="vscode-container">
+        <div class="activity-bar">
+            <div class="activity-bar-top">
+                <svg class="icon active" viewBox="0 0 24 24"><path fill="currentColor" d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M7,7V9H17V7H7M7,11V13H17V11H7M7,15V17H14V15H7Z" /></svg>
+                <a href="https://github.com/ritesh556" target="_blank" style="display: flex; align-items: center; justify-content: center;">
+                    <svg class="icon" viewBox="0 0 24 24" style="fill: white; background-color: transparent;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12,2A10,10 0 0,0 2,12C0,16.42 2.87,20.17 6.84,21.5C7.34,21.58 7.5,21.23 7.5,20.92V18.97C5.22,19.42 4.67,18.15 4.67,18.15C4.27,17.14 3.58,16.84 3.58,16.84C2.78,16.3 3.64,16.29 3.64,16.29C4.5,16.36 5,17.18 5,17.18C5.82,18.61 7.2,18.16 7.76,17.92C7.84,17.34 8.08,16.94 8.34,16.7C6.17,16.45 3.85,15.61 3.85,11.97C3.85,10.95 4.2,10.13 4.78,9.5C4.68,9.25 4.33,8.21 4.88,6.88C4.88,6.88 5.64,6.63 7.45,7.8C8.17,7.6 8.95,7.5 9.73,7.5C10.5,7.5 11.28,7.6 12,7.8C13.8,6.63 14.57,6.88 14.57,6.88C15.12,8.21 14.77,9.25 14.67,9.5C15.25,10.13 15.6,10.95 15.6,11.97C15.6,15.62 13.28,16.45 11.1,16.7C11.43,17 11.75,17.57 11.75,18.46V20.92C11.75,21.23 11.91,21.58 12.41,21.5C16.38,20.17 19.25,16.42 19.25,12A10,10 0 0,0 12,2Z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/ritesh-nepal-8239a8199/" target="_blank" style="display: flex; align-items: center; justify-content: center;">
+                    <svg class="icon" viewBox="0 0 24 24" style="fill: white; background-color: transparent;">
+                        <path d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17C15.08,12.17 15.71,12.8 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,6 7.94,5.34 7.19,5.34C6.43,5.34 5.81,6 5.81,6.88C5.81,7.74 6.43,8.56 7.19,8.56C7.28,8.56 7.37,8.56 7.45,8.54C7.45,8.54 7.45,8.54 7.45,8.54L6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z" />
+                    </svg>
+                </a>
+           <button id="settings-toggle" class="icon-button" aria-label="Open settings menu">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11.03L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.73,5.36C19.61,5.14 19.34,5.05 19.1,5.14L16.65,6.1C16.04,5.63 15.37,5.24 14.68,4.96L14.28,2.44C14.23,2.19 14,2 13.75,2H10.25C10,2 9.77,2.19 9.72,2.44L9.32,4.96C8.63,5.24 7.96,5.63 7.36,6.1L4.91,5.14C4.66,5.05 4.39,5.14 4.28,5.36L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11.03C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.28,18.64C4.39,18.86 4.66,18.95 4.91,18.86L7.36,17.9C7.96,18.37 8.63,18.76 9.32,19.04L9.72,21.56C9.77,21.81 10,22 10.25,22H13.75C14,22 14.23,21.81 14.28,21.56L14.68,19.04C15.37,18.76 16.04,18.37 16.65,17.9L19.1,18.86C19.34,18.95 19.61,18.86 19.73,18.64L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </button>
+            </div>
+             <div id="settings-menu" class="settings-menu-overlay">
+        <div class="settings-menu-content">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button id="close-settings" class="close-btn" aria-label="Close settings menu">&times;</button>
+            </div>
+            <ul>
+                <li><a href="#" class="menu-item">Extensions</a> <span class="shortcut">Ctrl+Shift+X</span></li>
+                <li><a href="#" class="menu-item">Keyboard Shortcuts</a> <span class="shortcut">Ctrl+K Ctrl+S</span></li>
+                <li><a href="#" class="menu-item">Snippets</a></li>
+                <li><a href="#" class="menu-item">Tasks</a></li>
+                <li class="has-submenu">
+                    <a href="#" class="menu-item">Themes</a>
+                    <span class="submenu-arrow">></span>
+                    </li>
+                <li class="separator"></li> <li><a href="#" class="menu-item">Backup and Sync Settings...</a></li>
+                <li><a href="#" class="menu-item">Check for Updates...</a></li>
+            </ul>
+        </div>
+    </div>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">Explorer</div>
+            <ul class="file-explorer">
+                <li class="file-explorer-item" data-file="profile"><img src="https://img.icons8.com/color/48/html-5--v1.png" class="file-icon" alt="HTML Icon"> profile.html</li>
+                <li class="file-explorer-item" data-file="about"><img src="https://img.icons8.com/office/48/markdown.png" class="file-icon" alt="Markdown Icon"> about.md</li>
+                <li class="file-explorer-item" data-file="skills"><img src="https://img.icons8.com/color/48/css3.png" class="file-icon" alt="CSS Icon"> skills.css</li>
+                <li class="file-explorer-item" data-file="projects"><img src="https://img.icons8.com/color/48/json.png" class="file-icon" alt="JSON Icon"> projects.json</li>
+                <li class="file-explorer-item" data-file="experience"><img src="https://img.icons8.com/color/48/javascript--v1.png" class="file-icon" alt="JS Icon"> experience.js</li>
+                <li class="file-explorer-item" data-file="achievements"><img src="https://img.icons8.com/color/48/python--v1.png" class="file-icon" alt="Python Icon"> achievements.py</li>
+                <li class="file-explorer-item" data-file="contact"><img src="https://img.icons8.com/fluency/48/contact-card.png" class="file-icon" alt="Contact Icon"> contact.js</li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="editor-tabs" id="editor-tabs"></div>
+            
+            
+            
+            <div class="editor" id="editor">
+                <div class="editor-pane welcome-pane active" id="welcome-pane">
+                    <h2>Welcome to my portfolio!</h2>
+                    <p>Click a file on the left to get started.</p>
+                </div>
+                <div class="editor-pane" id="profile-pane">
+<pre><code><span class="code-function">👨‍💻 Ritesh Raj Nepal | Full-Stack Developer</span>
+<br>
+<span class="code-comment">&lt;!-- Professional Summary --&gt;</span>
+<span class="code-tag-bracket">&lt;</span><span class="code-tag-name">h2</span><span class="code-tag-bracket">&gt;</span><span class="code-text">✨ Professional Summary</span><span class="code-tag-bracket">&lt;/</span><span class="code-tag-name">h2</span><span class="code-tag-bracket">&gt;</span>
+<span class="code-tag-bracket">&lt;</span><span class="code-tag-name">p</span><span class="code-tag-bracket">&gt;</span><span class="code-text">Creative and performance-driven full-stack developer specializing 
+in modern web technologies. Passionate about building responsive 
+interfaces and scalable backend systems.</span><span class="code-tag-bracket">&lt;/</span><span class="code-tag-name">p</span><span class="code-tag-bracket">&gt;</span>
+<br>
+<span class="code-comment">&lt;!-- Education --&gt;</span>
+<span class="code-tag-bracket">&lt;</span><span class="code-tag-name">h2</span><span class="code-tag-bracket">&gt;</span><span class="code-text">🎓 Education</span><span class="code-tag-bracket">&lt;/</span><span class="code-tag-name">h2</span><span class="code-tag-bracket">&gt;</span>
+<span class="code-tag-bracket">&lt;</span><span class="code-tag-name">p</span><span class="code-tag-bracket">&gt;</span><span class="code-attr-name">Bachelor of Information Management</span><span class="code-text"> - Tribhuvan University (2019-2024)
+GPA: </span><span class="code-number">3.36</span><span class="code-tag-bracket">&lt;/</span><span class="code-tag-name">p</span><span class="code-tag-bracket">&gt;</span></code></pre>
+                </div>
+                <div class="editor-pane" id="about-pane">
+<pre><code><span class="code-md-heading"># About Me</span>
+
+<span class="code-text">I'm a developer who finds joy in the art of problem-solving. Whether it's 
+architecting a scalable backend or fine-tuning the front-end for a seamless
+user experience, I am driven by the challenge of creating efficient, elegant,
+and impactful code.
+
+My journey into tech was fueled by a lifelong passion for logic and strategy, 
+which I've honed for years as a competitive chess player. The same focus,
+foresight, and creativity required at the chessboard are what I bring to
+every project I undertake.
+
+</span><span class="code-comment">-- My Philosophy --</span>
+<span class="code-text">></span> <span class="code-string">"Clean code is a language in itself."</span>
+<span class="code-text">></span> <span class="code-string">"Continuous learning is the key to staying sharp."</span>
+<span class="code-text">></span> <span class="code-string">"Collaboration drives innovation."</span>
+</code></pre>
+                </div>
+                <div class="editor-pane" id="skills-pane">
+<pre><code><span class="code-comment">/* My Tech Stack */</span>
+<span class="code-tag-name">#languages</span> {
+    <span class="code-attr-name">speak</span>: <span class="code-attr-value">"JavaScript"</span>, <span class="code-attr-value">"TypeScript"</span>, <span class="code-attr-value">"Python"</span>, <span class="code-attr-value">"HTML/CSS"</span>;
+}
+<span class="code-tag-name">.frontend</span> {
+    <span class="code-attr-name">frameworks</span>: <span class="code-attr-value">"React"</span>, <span class="code-attr-value">"Vue.js"</span>;
+    <span class="code-attr-name">styling</span>: <span class="code-attr-value">"Tailwind CSS"</span>, <span class="code-attr-value">"SASS"</span>;
+}
+<span class="code-tag-name">.backend</span> {
+    <span class="code-attr-name">runtime</span>: <span class="code-attr-value">"Node.js"</span>;
+    <span class="code-attr-name">framework</span>: <span class="code-attr-value">"Express.js"</span>;
+}
+<span class="code-tag-name">.database</span> {
+    <span class="code-attr-name">type</span>: <span class="code-attr-value">"MongoDB"</span>, <span class="code-attr-value">"SQL"</span>;
+}
+<span class="code-tag-name">.tools</span> {
+    <span class="code-attr-name">version-control</span>: <span class="code-attr-value">"Git & GitHub"</span>;
+    <span class="code-attr-name">editor</span>: <span class="code-attr-value">"VS Code"</span>;
+}</code></pre>
+                </div>
+                <div class="editor-pane" id="projects-pane">
+<pre><code>{
+    <span class="code-json-key">"projects"</span>: [
+        {
+            <span class="code-json-key">"name"</span>: <span class="code-string">"Meta Logic Website Redesign"</span>,
+            <span class="code-json-key">"description"</span>: <span class="code-string">"Improved UI/UX using React & TypeScript."</span>,
+            <span class="code-json-key">"stack"</span>: [<span class="code-string">"React"</span>, <span class="code-string">"TypeScript"</span>, <span class="code-string">"Vercel"</span>],
+            <span class="code-json-key">"url"</span>: <span class="code-string">"<a href="https://meta-logic-chi.vercel.app/" target="_blank" class="code-link">https://meta-logic-chi.vercel.app/</a>"</span>
+        },
+        {
+            <span class="code-json-key">"name"</span>: <span class="code-string">"Booksmart Platform"</span>,
+            <span class="code-json-key">"description"</span>: <span class="code-string">"Full-stack MERN app with auth, search, and admin features."</span>,
+            <span class="code-json-key">"stack"</span>: [<span class="code-string">"MongoDB"</span>, <span class="code-string">"Express"</span>, <span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>],
+            <span class="code-json-key">"url"</span>: <span class="code-string">"<a href="https://github.com/ritesh556/booksmart" target="_blank" class="code-link">https://github.com/ritesh556/booksmart</a>"</span>
+        }
+    ]
+}</code></pre>
+                </div>
+                <div class="editor-pane" id="experience-pane">
+<pre><code><span class="code-comment">// Experience.js</span>
+<span class="code-keyword">const</span> <span class="code-variable">internship</span> = {
+    <span class="code-variable">company</span>: <span class="code-string">"Yaj Tech Pvt. Ltd."</span>,
+    <span class="code-variable">role</span>: <span class="code-string">"Frontend Developer Intern"</span>,
+    <span class="code-variable">period</span>: <span class="code-string">"Apr 2024 – Jul 2024"</span>,
+};
+<span class="code-keyword">class</span> <span class="code-function">Responsibilities</span> {
+    <span class="code-keyword">constructor</span>() {
+        <span class="code-keyword">this</span>.<span class="code-variable">duties</span> = [
+            <span class="code-string">"Created reusable Vue.js components with Tailwind CSS."</span>,
+            <span class="code-string">"Integrated REST APIs for dynamic data rendering."</span>,
+            <span class="code-string">"Improved UI load times by 25% through optimization."</span>,
+        ];
+    }
+}</code></pre>
+                </div>
+                <div class="editor-pane" id="achievements-pane">
+<pre><code><span class="code-comment"># achievements.py</span>
+<span class="code-keyword">class</span> <span class="code-function">PersonalAchievements</span>:
+    <span class="code-keyword">def</span> __init__(<span class="code-variable">self</span>):
+        <span class="code-variable">self</span>.chess = {
+            <span class="code-string">"platform"</span>: <span class="code-string">"Chess.com"</span>,
+            <span class="code-string">"format"</span>: <span class="code-string">"Rapid"</span>,
+            <span class="code-string">"rating"</span>: <span class="code-number">2000</span>
+        }
+        <span class="code-variable">self</span>.federation = {
+            <span class="code-string">"name"</span>: <span class="code-string">"FIDE"</span>,
+            <span class="code-string">"rating"</span>: <span class="code-number">1640</span>
+        }</code></pre>
+                </div>
+                <div class="editor-pane" id="contact-pane">
+<pre><code><span class="code-comment">// contact.js</span>
+<span class="code-keyword">const</span> <span class="code-variable">contactInfo</span> = {
+    <span class="code-variable">email</span>: <span class="code-string">"riteshnepal6@gmail.com"</span>,
+    <span class="code-variable">phone</span>: <span class="code-string">"+977 9813833723"</span>,
+    <span class="code-variable">location</span>: {
+        <span class="code-variable">city</span>: <span class="code-string">"Biratnagar"</span>,
+        <span class="code-variable">country</span>: <span class="code-string">"Nepal"</span>
+    },
+    <span class="code-variable">social</span>: {
+        <span class="code-variable">github</span>: <span class="code-string">"<a href="https://github.com/ritesh556" target="_blank" class="code-link">github.com/ritesh556</a>"</span>,
+        <span class="code-variable">linkedin</span>: <span class="code-string">"<a href="https://www.linkedin.com/in/ritesh-nepal-8239a8199/" target="_blank" class="code-link">linkedin.com/in/ritesh-nepal</a>"</span>
+    }
+};</code></pre>
+                </div>
+            </div>
+
+            <div class="terminal">
+                <div class="terminal-header">TERMINAL</div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-line"><span class="code-text">Portfolio session started. Type 'help' for commands.</span></div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">user@portfolio:~$</span>
+                        <input type="text" class="terminal-input" id="terminal-input" autofocus />
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-bar-left"><span>main*</span><span>&lt; /&gt;</span></div>
+                <div class="status-bar-right"><span>Spaces: 2</span><span>UTF-8</span><span>Prettier</span></div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="script.js"></script>
+</body>
+</html>
